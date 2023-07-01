@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styling/App.scss';
-import LocationForm from './LocationForm'
+import LocationForm from './LocationForm';
+import ServicesForm from './ServicesForm';
 
 interface Service {
   name: string | undefined;
@@ -23,7 +24,20 @@ interface Form {
 const App: React.FC = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<Form>();
-  const [locations, setLocations] = useState(['Ippokratous', 'Parasiou 28']);
+  const [availableLocations, setAvailableLocations] = useState(['Ippokratous', 'Parasiou 28']);
+  const [availableServices, setAvailableServices] = useState<Service[]>([{
+    name: 'Classic cut',
+    price: 14,
+    duration: 30
+  }, {
+    name: 'Skin fade',
+    price: 15,
+    duration: 30
+  }, {
+    name: 'Beard trim',
+    price: 7,
+    duration: 15
+  }]);
 
   const setFormLocation = (location: string) => {
     let copyForm: Form = {...form}
@@ -31,13 +45,26 @@ const App: React.FC = () => {
     setForm(copyForm);
     setStep(step + 1);
   }
+
+  const setFormServices = (services: Service[]) => {
+    let copyForm: Form = {...form}
+    copyForm.selected_services = services;
+    setForm(copyForm);
+    setStep(step + 1);
+  }
+
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
   // This component will render 5 different form components, all of them will change state.
   return (
     <div className="App">
       <header className="App-header">
         <h1>Step {step} of 5</h1>
         {step === 1 &&
-          <LocationForm locations={locations} setFormLocation={setFormLocation}/>
+          <LocationForm availableLocations={availableLocations} setFormLocation={setFormLocation}/>
+        } {step === 2 &&
+          <ServicesForm availableServices={availableServices} setFormServices={setFormServices}/>
         } 
       </header>
     </div>

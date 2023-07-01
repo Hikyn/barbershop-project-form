@@ -2,11 +2,11 @@ import { FormEventHandler, useState } from 'react';
 import '../styling/Location.scss';
 
 interface Props {
-    locations: string[];
+    availableLocations: string[];
     setFormLocation: (locations: string) => void;
 }
 
-const LocationForm: React.FC<Props> = ({ locations, setFormLocation }) => {
+const LocationForm: React.FC<Props> = ({ availableLocations, setFormLocation }) => {
   // This component will render 5 different form components, all of them will change state.
   function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {
     event?.preventDefault();
@@ -20,7 +20,7 @@ const LocationForm: React.FC<Props> = ({ locations, setFormLocation }) => {
   return (
     <form className="locationForm" onSubmit={onSubmitButton}>
         <legend>Select preferred location: </legend>
-        {locations.map((location) => {
+        {availableLocations.map((location) => {
             return (
                 <div>
                     <input type='radio' id={'location' + location} name='location' value={location}></input>

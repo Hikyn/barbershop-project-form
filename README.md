@@ -48,3 +48,6 @@ for (let i = 0; i < checkboxes.length; i += 1) {
     console.log(node.checked)
 }
 ```
+Thanks to that answer:
+
+https://github.com/DevExpress/testcafe/issues/5012

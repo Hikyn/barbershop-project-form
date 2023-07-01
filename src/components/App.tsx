@@ -25,7 +25,9 @@ interface Form {
 const App: React.FC = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<Form>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableLocations, setAvailableLocations] = useState(['Ippokratous', 'Parasiou 28']);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableStaff, setAvailableStaff] = useState<Barber[]>([
     {
       name: "Theo",
@@ -38,6 +40,7 @@ const App: React.FC = () => {
       job_title: "Head Barber"
     }
   ]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableServices, setAvailableServices] = useState<Service[]>([{
     name: 'Classic cut',
     price: 14,

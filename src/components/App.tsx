@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styling/App.scss';
 import LocationForm from './LocationForm';
 import ServicesForm from './ServicesForm';
+import StaffForm from './StaffForm';
 
 interface Service {
   name: string | undefined;
@@ -25,6 +26,18 @@ const App: React.FC = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<Form>();
   const [availableLocations, setAvailableLocations] = useState(['Ippokratous', 'Parasiou 28']);
+  const [availableStaff, setAvailableStaff] = useState<Barber[]>([
+    {
+      name: "Theo",
+      job_title: "Head Barber"
+    }, {
+      name: "Maria",
+      job_title: "Head Barber"
+    }, {
+      name: "Theodoros",
+      job_title: "Head Barber"
+    }
+  ]);
   const [availableServices, setAvailableServices] = useState<Service[]>([{
     name: 'Classic cut',
     price: 14,
@@ -53,6 +66,13 @@ const App: React.FC = () => {
     setStep(step + 1);
   }
 
+  const setFormBarber = (barber: Barber) => {
+    let copyForm: Form = {...form}
+    copyForm.selected_barber = barber;
+    setForm(copyForm);
+    setStep(step + 1);
+  }
+
   useEffect(() => {
     console.log(form);
   }, [form]);
@@ -65,6 +85,8 @@ const App: React.FC = () => {
           <LocationForm availableLocations={availableLocations} setFormLocation={setFormLocation}/>
         } {step === 2 &&
           <ServicesForm availableServices={availableServices} setFormServices={setFormServices}/>
+        } {step === 3 &&
+          <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
         } 
       </header>
     </div>

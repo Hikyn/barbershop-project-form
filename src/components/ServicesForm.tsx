@@ -1,6 +1,4 @@
-import { FormEventHandler, useState } from 'react';
 import '../styling/Location.scss';
-import { InputType } from 'zlib';
 
 interface Service {
     name: string | undefined;

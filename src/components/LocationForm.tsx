@@ -1,12 +1,21 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import '../styling/Location.scss';
+import { json } from 'stream/consumers';
 
 interface Props {
-    availableLocations: string[];
     setFormLocation: (locations: string) => void;
 }
 
-const LocationForm: React.FC<Props> = ({ availableLocations, setFormLocation }) => {
+interface Location {
+  _id?: string,
+  location?: string,
+  map_index?: number,
+  name?: string
+}
+
+const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
+  const [barbershops, setBarbershops] = useState<Location[]>([]);
+
   // This component will render 5 different form components, all of them will change state.
   function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {
     event?.preventDefault();
@@ -17,16 +26,37 @@ const LocationForm: React.FC<Props> = ({ availableLocations, setFormLocation }) 
     setFormLocation(target.location.value);
   };
 
+  async function getBarbershops(){
+    const url = new URL("http:/localhost:3000/barbershops");
+    const res = await fetch(url, {
+      method: "GET"
+    })
+    const data = await res.json();
+    //console.log(data)
+    console.log("Requesting locations")
+    setBarbershops(data);
+  }
+
+  useEffect(() => {
+    getBarbershops();
+  }, [])
+
+  useEffect(() => {
+    //console.log(barbershops);
+  }, [barbershops])
+    
   return (
     <form className="locationForm" onSubmit={onSubmitButton}>
         <legend>Select preferred location: </legend>
-        {availableLocations.map((location) => {
+        <ul>
+        {barbershops.map((location) => {
             return (
-                <div>
-                    <input type='radio' id={'location' + location} name='location' value={location}></input>
-                    <label htmlFor={'location' + location}>{location}</label>
-                </div>
+                  <li key={location._id}>
+                    <input type='radio' id={'location' + location._id} name='location' value={location.name}></input>
+                    <label htmlFor={'location' + location._id}>{location.name}</label>
+                  </li>
         )})}
+        </ul>
         <button type="submit">Submit</button>
     </form>
   );

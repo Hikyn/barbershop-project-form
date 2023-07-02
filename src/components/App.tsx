@@ -26,8 +26,6 @@ const App: React.FC = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<Form>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [availableLocations, setAvailableLocations] = useState(['Ippokratous', 'Parasiou 28']);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableStaff, setAvailableStaff] = useState<Barber[]>([
     {
       name: "Theo",
@@ -78,12 +76,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     console.log(form);
-    const url = new URL("http:/localhost:3000/barbers");
-    fetch(url, {
-      method: "GET"
-    })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
   }, [form]);
   // This component will render 5 different form components, all of them will change state.
   return (
@@ -91,7 +83,7 @@ const App: React.FC = () => {
       <header className="App-header">
         <h1>Step {step} of 5</h1>
         {step === 1 &&
-          <LocationForm availableLocations={availableLocations} setFormLocation={setFormLocation}/>
+          <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&
           <ServicesForm availableServices={availableServices} setFormServices={setFormServices}/>
         } {step === 3 &&

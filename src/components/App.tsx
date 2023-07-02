@@ -78,6 +78,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     console.log(form);
+    const url = new URL("http:/localhost:3000/barbers");
+    fetch(url, {
+      method: "GET"
+    })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
   }, [form]);
   // This component will render 5 different form components, all of them will change state.
   return (

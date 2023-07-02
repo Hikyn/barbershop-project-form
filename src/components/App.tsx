@@ -15,8 +15,15 @@ interface Barber {
   job_title: string | undefined;
 }
 
+interface Location {
+  _id?: string,
+  location?: string,
+  map_index?: number,
+  name?: string
+}
+
 interface Form {
-  selected_location?: string;
+  selected_location?: Location;
   selected_services?: Service[];
   selected_barber?: Barber;
   selected_date?: Date;
@@ -40,7 +47,7 @@ const App: React.FC = () => {
   ]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-  const setFormLocation = (location: string) => {
+  const setFormLocation = (location: Location) => {
     let copyForm: Form = {...form}
     copyForm.selected_location = location;
     setForm(copyForm);

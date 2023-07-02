@@ -3,7 +3,7 @@ import '../styling/Location.scss';
 import { json } from 'stream/consumers';
 
 interface Props {
-    setFormLocation: (locations: string) => void;
+    setFormLocation: (location: Location) => void;
 }
 
 interface Location {
@@ -23,7 +23,11 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
         location: { value: string };
     };
     console.log(target.location.value);
-    setFormLocation(target.location.value);
+    barbershops.forEach(barbershop => {
+      if (barbershop._id === target.location.value) {
+        setFormLocation(barbershop);
+      }
+    })
   };
 
   async function getBarbershops(){

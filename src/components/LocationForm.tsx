@@ -51,9 +51,9 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
         <ul>
         {barbershops.map((location) => {
             return (
-                  <li key={location._id}>
-                    <input type='radio' id={'location' + location._id} name='location' value={location.name}></input>
-                    <label htmlFor={'location' + location._id}>{location.name}</label>
+                  <li key={'key' + location._id}>
+                    <input type='radio' id={location._id} name='location' value={location._id}></input>
+                    <label htmlFor={location._id}>{location.name}</label>
                   </li>
         )})}
         </ul>

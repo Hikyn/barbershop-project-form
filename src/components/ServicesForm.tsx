@@ -1,40 +1,55 @@
 import '../styling/Location.scss';
+import { FormEventHandler, useEffect, useState } from 'react';
 
 interface Service {
-    name: string | undefined;
-    price: number | undefined;
-    duration: number | undefined;
+    _id: string;
+    name: string;
+    price: number;
+    duration: number;
   }
 
 interface Props {
-    availableServices: Service[];
     setFormServices: (services: Service[]) => void;
 }
 
-const ServicesForm: React.FC<Props> = ({ availableServices, setFormServices }) => {
+const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
+  const [availableServices, setAvailableServices] = useState<Service[]>([]);
   // This component will render 5 different form components, all of them will change state.
   function onSubmitButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let checkboxes: NodeList = document.querySelectorAll('.checkbox');
 
-    let services: Service[] = [];
+    let selected_services: Service[] = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
         let node = checkboxes[i] as HTMLInputElement;
         if (node.checked) {
-            services.push(availableServices[i]);
+          selected_services.push(availableServices[i]);
         }
     }
-
-    setFormServices(services);
+    
+    setFormServices(selected_services);
   };
+  async function getServices(){
+    const url = new URL("http:/localhost:3000/services");
+    const res = await fetch(url, {
+      method: "GET"
+    })
+    const data = await res.json();
+    //console.log(data)
+    console.log("Requesting services")
+    setAvailableServices(data);
+  }
+  useEffect(() => {
+    getServices();
+  }, [])
 
   return (
     <form className="locationForm" onSubmit={onSubmitButton}>
         <legend>Select preferred services: </legend>
         {availableServices.map((service) => {
             return (
-                <div>
-                    <input type='checkbox' className='checkbox' id={'service' + service.name} name='service' value={service.name}></input>
+                <div key={"service" + service._id}>
+                    <input type='checkbox' className='checkbox' id={'service' + service.name} name='service' value={service._id}></input>
                     <label htmlFor={'service' + service.name}>{service.name}</label>
                 </div>
         )})}

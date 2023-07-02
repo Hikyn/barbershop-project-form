@@ -39,19 +39,6 @@ const App: React.FC = () => {
     }
   ]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [availableServices, setAvailableServices] = useState<Service[]>([{
-    name: 'Classic cut',
-    price: 14,
-    duration: 30
-  }, {
-    name: 'Skin fade',
-    price: 15,
-    duration: 30
-  }, {
-    name: 'Beard trim',
-    price: 7,
-    duration: 15
-  }]);
 
   const setFormLocation = (location: string) => {
     let copyForm: Form = {...form}
@@ -85,7 +72,7 @@ const App: React.FC = () => {
         {step === 1 &&
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&
-          <ServicesForm availableServices={availableServices} setFormServices={setFormServices}/>
+          <ServicesForm setFormServices={setFormServices}/>
         } {step === 3 &&
           <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
         } 

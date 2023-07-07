@@ -7,10 +7,10 @@ interface Props {
 }
 
 interface Location {
-  _id?: string,
-  location?: string,
-  map_index?: number,
-  name?: string
+  _id: string,
+  location: string,
+  map_index: number,
+  name: string
 }
 
 const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
@@ -41,6 +41,10 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
     setBarbershops(data);
   }
 
+  const handleClick = (event: any) => {
+    event.target.form.requestSubmit();
+  }
+
   useEffect(() => {
     getBarbershops();
   }, [])
@@ -50,20 +54,27 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
   }, [barbershops])
     
   return (
+    <>
+    <div className='sectionAnnounce'>Select preferred location</div>
     <form className="locationForm" onSubmit={onSubmitButton}>
-        <legend>Select preferred location: </legend>
-        <ul>
-        {barbershops.map((location) => {
-            return (
-                  <li key={'key' + location._id}>
-                    <input type='radio' id={location._id} name='location' value={location._id}></input>
-                    <label htmlFor={location._id}>{location.name}</label>
-                  </li>
-        )})}
-        </ul>
-        <button type="submit">Submit</button>
+      <div className="barbershops">
+      {barbershops.map((location) => {
+        return (
+          <div key={'key' + location._id}>
+            <input type='radio' id={location._id} name='location' value={location._id} onClick={handleClick}></input>
+            <label htmlFor={location._id}>
+              {location.name}
+              <p>Located in {location.location}, Athens, Greece</p>
+              <p>{location.map_index}</p>
+              <p>Open: Monday - Saturday</p>
+              <p>9:00 - 18:00</p>
+            </label>
+          </div>
+      )})}
+      </div>
+      <button type="submit">Submit</button>
     </form>
-  );
+    </>);
 }
 
 export default LocationForm;

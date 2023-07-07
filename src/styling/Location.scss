@@ -1,0 +1,9 @@
+.barbershops {
+    display: grid;
+    grid: Max(0, 1fr)/Max(0, 1fr) Max(0, 1fr);
+
+    p {
+        color: rgb(126, 126, 126);
+        margin: 0;
+    }
+}

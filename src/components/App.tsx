@@ -11,15 +11,17 @@ interface Service {
 }
 
 interface Barber {
-  name: string | undefined;
-  job_title: string | undefined;
+  _id: string;
+  first_name: string;
+  last_name: string;
+  phone_number: number;
 }
 
 interface Location {
-  _id?: string,
-  location?: string,
-  map_index?: number,
-  name?: string
+  _id: string,
+  location: string,
+  map_index: number,
+  name: string
 }
 
 interface Form {
@@ -33,25 +35,26 @@ const App: React.FC = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<Form>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [availableStaff, setAvailableStaff] = useState<Barber[]>([
-    {
-      name: "Theo",
-      job_title: "Head Barber"
-    }, {
-      name: "Maria",
-      job_title: "Head Barber"
-    }, {
-      name: "Theodoros",
-      job_title: "Head Barber"
-    }
-  ]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [availableStaff, setAvailableStaff] = useState<Barber[]>([]);
+
+
+  async function getBarbers(barbershopId: string){
+    const url = new URL(`http:/localhost:3000/barbershops/${barbershopId}/barbers`);
+    const res = await fetch(url, {
+      method: "GET"
+    })
+    const data = await res.json();
+    console.log(data)
+    console.log("Requesting barbers")
+    setAvailableStaff(data);
+  }
 
   const setFormLocation = (location: Location) => {
     let copyForm: Form = {...form}
     copyForm.selected_location = location;
     setForm(copyForm);
     setStep(step + 1);
+    getBarbers(location._id);
   }
 
   const setFormServices = (services: Service[]) => {
@@ -67,10 +70,10 @@ const App: React.FC = () => {
     setForm(copyForm);
     setStep(step + 1);
   }
-
   useEffect(() => {
     console.log(form);
   }, [form]);
+
   // This component will render 5 different form components, all of them will change state.
   return (
     <div className="App">

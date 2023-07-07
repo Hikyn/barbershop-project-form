@@ -1,9 +1,11 @@
 import '../styling/Location.scss';
 
 interface Barber {
-    name: string | undefined;
-    job_title: string | undefined;
-  }
+  _id: string;
+  first_name: string;
+  last_name: string;
+  phone_number: number;
+}
 
 interface Props {
     availableStaff: Barber[];
@@ -19,7 +21,7 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
     };
     console.log(target.barber.value);
     for (let i = 0; i < availableStaff.length; i += 1) {
-        if (availableStaff[i].name === target.barber.value) {
+        if (availableStaff[i]._id === target.barber.value) {
             setFormBarber(availableStaff[i]);
             return;
         }
@@ -31,9 +33,9 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
         <legend>Select preferred barber: </legend>
         {availableStaff.map((barber) => {
             return (
-                <div>
-                    <input type='radio' id={'barber' + barber.name} name='barber' value={barber.name}></input>
-                    <label htmlFor={'barber' + barber.name}>{barber.name}</label>
+                <div key={'barber' + barber._id}>
+                    <input type='radio' id={'barber' + barber._id} name='barber' value={barber._id}></input>
+                    <label htmlFor={'barber' + barber._id}>{barber.first_name + " " + barber.last_name}</label>
                 </div>
         )})}
         <button type="submit">Submit</button>

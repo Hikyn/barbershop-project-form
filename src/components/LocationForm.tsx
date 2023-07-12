@@ -1,6 +1,7 @@
 import { FormEventHandler, useEffect, useState } from 'react';
 import '../styling/Location.scss';
 import { json } from 'stream/consumers';
+import LocationCard from './LocationCard'; 
 
 interface Props {
     setFormLocation: (location: Location) => void;
@@ -55,24 +56,15 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
     
   return (
     <>
-    <div className='sectionAnnounce'>Select preferred location</div>
+    <h1 className='sectionAnnounce'>Select preferred location</h1>
     <form className="locationForm" onSubmit={onSubmitButton}>
       <div className="barbershops">
       {barbershops.map((location) => {
         return (
-          <div key={'key' + location._id}>
-            <input type='radio' id={location._id} name='location' value={location._id} onClick={handleClick}></input>
-            <label htmlFor={location._id}>
-              {location.name}
-              <p>Located in {location.location}, Athens, Greece</p>
-              <p>{location.map_index}</p>
-              <p>Open: Monday - Saturday</p>
-              <p>9:00 - 18:00</p>
-            </label>
-          </div>
+          <LocationCard location={location} onSubmitButton={onSubmitButton} handleClick={handleClick} />
       )})}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" hidden>Submit</button>
     </form>
     </>);
 }

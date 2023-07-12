@@ -21,7 +21,7 @@ $mediaMinWidth: 480px;
         border: 1px solid black;
         border-radius: 0.5rem;
         margin: 1rem 0rem;
-
+        
         transition: all 0.2s;
 
         &:hover {
@@ -29,10 +29,14 @@ $mediaMinWidth: 480px;
         }
 
         img {
+            cursor: pointer;
             width: 100%;
             
         }
 
+        label {
+            cursor: pointer;
+        }
         p, h1 {
             margin: 0px 1rem;
         }

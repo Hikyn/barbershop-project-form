@@ -1,12 +1,14 @@
 import '../styling/ServicesForm.scss';
 import { FormEventHandler, useEffect, useState } from 'react';
+import ServiceCard from './ServiceCard'; 
 
 interface Service {
     _id: string;
     name: string;
     price: number;
-    duration: number;
+    time: number;
     category: string;
+    description: string;
   }
 
 interface Props {
@@ -23,7 +25,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
   // This component will render 5 different form components, all of them will change state.
   function onSubmitButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    let checkboxes: NodeList = document.querySelectorAll('.checkbox');
+    let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
 
     let selected_services: Service[] = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
@@ -84,49 +86,48 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
   }, [availableServices])
 
   return (
-    <form className="locationForm" onSubmit={onSubmitButton}>
+    <form className="serviceForm" onSubmit={onSubmitButton}>
         <h1 className='sectionAnnounce'>Select services: </h1>
         <h2>Hair</h2>
-        {hairServices.map((service) => {
-            return (
-                <div key={"service" + service._id}>
-                    <input type='checkbox' className='checkbox-round' id={'service' + service.name} name='service' value={service._id}></input>
-                    <label htmlFor={'service' + service.name}>{service.name}</label>
-                </div>
-        )})}
+        <div className='card'>
+          {hairServices.map((service) => {
+              return (
+                <ServiceCard service={service}/>
+          )})}
+        </div>
+
         <h2>Beard</h2>
-        {beardServices.map((service) => {
-            return (
-                <div key={"service" + service._id}>
-                    <input type='checkbox' className='checkbox-round' id={'service' + service.name} name='service' value={service._id}></input>
-                    <label htmlFor={'service' + service.name}>{service.name}</label>
-                </div>
-        )})}
+        <div className='card'>
+          {beardServices.map((service) => {
+              return (
+                <ServiceCard service={service}/>
+          )})}
+        </div>
+
         <h2>Facial Treatment</h2>
-        {facialServices.map((service) => {
-            return (
-                <div key={"service" + service._id}>
-                    <input type='checkbox' className='checkbox-round' id={'service' + service.name} name='service' value={service._id}></input>
-                    <label htmlFor={'service' + service.name}>{service.name}</label>
-                </div>
-        )})}
+        <div className='card'>
+          {facialServices.map((service) => {
+              return (
+                <ServiceCard service={service}/>
+          )})}
+        </div>
+
         <h2>Shave</h2>
-        {shaveServices.map((service) => {
-            return (
-                <div key={"service" + service._id}>
-                    <input type='checkbox' className='checkbox-round' id={'service' + service.name} name='service' value={service._id}></input>
-                    <label htmlFor={'service' + service.name}>{service.name}</label>
-                </div>
-        )})}
+        <div className='card'>
+          {shaveServices.map((service) => {
+              return (
+                <ServiceCard service={service}/>
+          )})}
+        </div>
+
         <h2>Packages & Combos</h2>
-        {packageServices.map((service) => {
-            return (
-                <div key={"service" + service._id}>
-                    <input type='checkbox' className='checkbox-round' id={'service' + service.name} name='service' value={service._id}></input>
-                    <label htmlFor={'service' + service.name}>{service.name}</label>
-                </div>
-        )})}
-        <button type="submit">Submit</button>
+        <div className='card'>
+          {packageServices.map((service) => {
+              return (
+                <ServiceCard service={service}/>
+          )})}
+        </div>
+        <button type="submit">Book now</button>
     </form>
   );
 }

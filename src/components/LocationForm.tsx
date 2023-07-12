@@ -23,7 +23,7 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
     const target = event.target as typeof event.target & {
         location: { value: string };
     };
-    console.log(target.location.value);
+    //console.log(target.location.value);
     barbershops.forEach(barbershop => {
       if (barbershop._id === target.location.value) {
         setFormLocation(barbershop);

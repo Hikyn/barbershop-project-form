@@ -14,3 +14,31 @@
 .checkbox-round:checked {
     background-color: blue;
 }
+
+.flex-column {
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+}
+
+.serviceForm {
+    .card {
+        border: 1px solid gray;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    h2 {
+        margin-top: 3rem;
+    }
+    h3 {
+        display: inline-block;
+        margin-left: 1rem;
+        margin-bottom: 0;
+    }
+
+    .time {
+        margin-top: 0px;
+        margin-bottom: 1rem;
+        color: gray;
+    }
+}

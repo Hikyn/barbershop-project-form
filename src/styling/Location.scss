@@ -1,11 +1,23 @@
+$mediaMaxWidth: 1260px;
+$mediaBp1Width: 960px;
+$mediaMinWidth: 480px;
+
 .barbershops {
     display: grid;
-    grid: Max(0, 1fr)/Max(0, 1fr) Max(0, 1fr);
+    @media (min-width: $mediaBp1Width) {
+        grid: 1fr/ repeat(2, Minmax(0, 1fr));;
+    }
+
+    @media (max-width: $mediaMinWidth) {
+        grid: repeat(2, Minmax(0, 1fr)) / 1fr;
+    }
+    justify-items:center;
+    
 
     .card {
         display: flex;
         gap: 0.5rem;
-        width: 50%;
+        width: 85%;
         border: 1px solid black;
         border-radius: 0.5rem;
         margin: 1rem 0rem;
@@ -14,6 +26,15 @@
 
         &:hover {
             background-color: rgba(0, 0, 0, 0.137);
+        }
+
+        img {
+            width: 100%;
+            
+        }
+
+        p, h1 {
+            margin: 0px 1rem;
         }
     }
 
@@ -35,4 +56,14 @@
 
 .sectionAnnounce {
     margin: 0px;
+}
+
+.locationCounter {
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    margin: 1rem 0;
+    h2 {
+        margin: 0px;
+    }
 }

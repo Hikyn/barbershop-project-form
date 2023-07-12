@@ -56,7 +56,11 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
     
   return (
     <>
-    <h1 className='sectionAnnounce'>Select preferred location</h1>
+    <h1 className='sectionAnnounce'>Select location</h1>
+    <div className='locationCounter'>
+      <h2>Example barbershop</h2>
+      <div>{barbershops.length} locations</div>
+    </div>
     <form className="locationForm" onSubmit={onSubmitButton}>
       <div className="barbershops">
       {barbershops.map((location) => {

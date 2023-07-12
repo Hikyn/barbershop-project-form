@@ -3,11 +3,15 @@ import '../styling/App.scss';
 import LocationForm from './LocationForm';
 import ServicesForm from './ServicesForm';
 import StaffForm from './StaffForm';
+import SelectedForms from './SelectedForms';
 
 interface Service {
-  name: string | undefined;
-  price: number | undefined;
-  duration: number | undefined;
+  _id: string;
+  name: string;
+  price: number;
+  time: number;
+  category: string;
+  description: string;
 }
 
 interface Barber {
@@ -33,7 +37,7 @@ interface Form {
 
 const App: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState<Form>();
+  const [form, setForm] = useState<Form>({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableStaff, setAvailableStaff] = useState<Barber[]>([]);
 
@@ -57,11 +61,13 @@ const App: React.FC = () => {
     getBarbers(location._id);
   }
 
-  const setFormServices = (services: Service[]) => {
+  const setFormServices = (services: Service[], increaseStep: boolean) => {
     let copyForm: Form = {...form}
     copyForm.selected_services = services;
     setForm(copyForm);
-    setStep(step + 1);
+    if (increaseStep) {
+      setStep(step + 1);
+    }
   }
 
   const setFormBarber = (barber: Barber) => {
@@ -82,7 +88,10 @@ const App: React.FC = () => {
         {step === 1 &&
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&
-          <ServicesForm setFormServices={setFormServices}/>
+          <div className="twoSections">
+            <ServicesForm form={form} setFormServices={setFormServices}/>
+            <SelectedForms form={form}/>
+          </div>
         } {step === 3 &&
           <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
         } 

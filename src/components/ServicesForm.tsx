@@ -3,19 +3,41 @@ import { FormEventHandler, useEffect, useState } from 'react';
 import ServiceCard from './ServiceCard'; 
 
 interface Service {
-    _id: string;
-    name: string;
-    price: number;
-    time: number;
-    category: string;
-    description: string;
-  }
-
-interface Props {
-    setFormServices: (services: Service[]) => void;
+  _id: string;
+  name: string;
+  price: number;
+  time: number;
+  category: string;
+  description: string;
 }
 
-const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
+interface Barber {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  phone_number: number;
+}
+
+interface Location {
+  _id: string,
+  location: string,
+  map_index: number,
+  name: string
+}
+
+interface Form {
+  selected_location?: Location;
+  selected_services?: Service[];
+  selected_barber?: Barber;
+  selected_date?: Date;
+}
+
+interface Props {
+    form: Form;
+    setFormServices: (services: Service[], increaseStep: boolean) => void;
+}
+
+const ServicesForm: React.FC<Props> = ({ form, setFormServices }) => {
   const [availableServices, setAvailableServices] = useState<Service[]>([]);
   const [hairServices, setHairServices] = useState<Service[]>([]);
   const [beardServices, setBeardServices] = useState<Service[]>([]);
@@ -23,6 +45,20 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
   const [shaveServices, setShaveServices] = useState<Service[]>([]);
   const [packageServices, setPackageServices] = useState<Service[]>([]);
   // This component will render 5 different form components, all of them will change state.
+  function handleChange(e: React.FormEvent<HTMLFormElement>) {
+    let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
+
+    let selected_services: Service[] = [];
+    for (let i = 0; i < checkboxes.length; i += 1) {
+        let node = checkboxes[i] as HTMLInputElement;
+        if (node.checked) {
+          selected_services.push(availableServices[i]);
+        }
+    }
+
+    setFormServices(selected_services, false);
+  };
+
   function onSubmitButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
@@ -35,7 +71,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         }
     }
     
-    setFormServices(selected_services);
+    setFormServices(selected_services, true);
   };
 
   useEffect(() => {
@@ -92,7 +128,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         <div className='card'>
           {hairServices.map((service) => {
               return (
-                <ServiceCard service={service}/>
+                <ServiceCard service={service} onChange={handleChange}/>
           )})}
         </div>
 
@@ -100,7 +136,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         <div className='card'>
           {beardServices.map((service) => {
               return (
-                <ServiceCard service={service}/>
+                <ServiceCard service={service} onChange={handleChange}/>
           )})}
         </div>
 
@@ -108,7 +144,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         <div className='card'>
           {facialServices.map((service) => {
               return (
-                <ServiceCard service={service}/>
+                <ServiceCard service={service} onChange={handleChange}/>
           )})}
         </div>
 
@@ -116,7 +152,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         <div className='card'>
           {shaveServices.map((service) => {
               return (
-                <ServiceCard service={service}/>
+                <ServiceCard service={service} onChange={handleChange}/>
           )})}
         </div>
 
@@ -124,10 +160,13 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
         <div className='card'>
           {packageServices.map((service) => {
               return (
-                <ServiceCard service={service}/>
+                <ServiceCard service={service} onChange={handleChange}/>
           )})}
         </div>
-        <button type="submit">Book now</button>
+        {Number(form.selected_services?.length) > 0 &&
+        <footer>
+          <button type="submit">Book now</button>
+        </footer>}
     </form>
   );
 }

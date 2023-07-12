@@ -1,5 +1,9 @@
+$mediaMaxWidth: 1260px;
+$mediaBp1Width: 960px;
+$mediaMinWidth: 480px;
+
 .App {
-    margin: 0rem 20vw;
+    margin: 0rem 15vw;
 }
 
 .App-header {
@@ -9,4 +13,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.twoSections {
+    display: grid;
+    @media (min-width: $mediaBp1Width) {
+        grid: 1fr/ Minmax(0, 1fr) Minmax(0, 0.5fr);;
+    }
+
+    @media (max-width: $mediaMinWidth) {
+        grid: Minmax(0, 1fr) Minmax(0, 0.5fr) / 1fr;
+    }
+
+    justify-items:center;
+    gap: 5rem;
+    padding-bottom: 7rem;
 }

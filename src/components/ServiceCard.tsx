@@ -19,9 +19,9 @@ const LocationCard: React.FC<Props> = ({ service, onChange }) => {
 
   return (
     <div key={"service" + service._id} className='oneService'>
-        <label className='flex-column' htmlFor={'service' + service._id}>
+        <label className='flex-column' htmlFor={service._id}>
             <div className='leftPart'>
-            <input type='checkbox' className='checkbox-round' id={'service' + service._id} name='service' value={service._id} onChange={onChange}></input>
+            <input type='checkbox' className='checkbox-round' id={service._id} name='service' value={service._id} onChange={onChange}></input>
             <h3>{service.name}</h3>
             <p className='time'>{service.time} min</p>
             <p className='description'>{service.description}</p>

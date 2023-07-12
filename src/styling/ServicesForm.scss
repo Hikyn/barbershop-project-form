@@ -19,17 +19,19 @@ $mediaMinWidth: 480px;
     background-color: blue;
 }
 
-.flex-column {
-    display: flex;
-    justify-content: space-between;
-    gap: Min(3rem, 10rem);
-    margin-bottom: 2rem;
-    cursor: pointer;
-    transition: 0.1s all;
-
-    &:hover {
-        border-radius: 0.3rem;
-        background-color: rgba(128, 128, 128, 0.151);
+.oneService {
+    .flex-column {
+        display: flex;
+        justify-content: space-between;
+        gap: Min(3rem, 10rem);
+        margin-bottom: 2rem;
+        cursor: pointer;
+        transition: 0.1s all;
+    
+        &:hover {
+            border-radius: 0.3rem;
+            background-color: rgba(128, 128, 128, 0.151);
+        }
     }
 }
 

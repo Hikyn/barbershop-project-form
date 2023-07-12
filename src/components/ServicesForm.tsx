@@ -51,8 +51,12 @@ const ServicesForm: React.FC<Props> = ({ form, setFormServices }) => {
     let selected_services: Service[] = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
         let node = checkboxes[i] as HTMLInputElement;
+        console.log(node)
         if (node.checked) {
-          selected_services.push(availableServices[i]);
+          let service = availableServices.find((service) => service._id === node.id)
+          if (service !== undefined) {
+            selected_services.push(service);
+          }
         }
     }
 

@@ -30,7 +30,7 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
 
   return (
     <form className="locationForm" onSubmit={onSubmitButton}>
-        <legend>Select preferred barber: </legend>
+        <h1 className='sectionAnnounce'>Select preferred barber: </h1>
         {availableStaff.map((barber) => {
             return (
                 <div key={'barber' + barber._id}>

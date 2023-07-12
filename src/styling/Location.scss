@@ -2,8 +2,37 @@
     display: grid;
     grid: Max(0, 1fr)/Max(0, 1fr) Max(0, 1fr);
 
+    .card {
+        display: flex;
+        gap: 0.5rem;
+        width: 50%;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        margin: 1rem 0rem;
+
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.137);
+        }
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
     p {
         color: rgb(126, 126, 126);
         margin: 0;
     }
+}
+
+.locationForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sectionAnnounce {
+    margin: 0px;
 }

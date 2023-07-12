@@ -78,7 +78,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Step {step} of 5</h1>
+        <p>Step {step} of 5</p>
         {step === 1 &&
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&

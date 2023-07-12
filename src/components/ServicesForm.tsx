@@ -45,7 +45,7 @@ const ServicesForm: React.FC<Props> = ({ setFormServices }) => {
 
   return (
     <form className="locationForm" onSubmit={onSubmitButton}>
-        <legend>Select preferred services: </legend>
+        <h1 className='sectionAnnounce'>Select preferred services: </h1>
         {availableServices.map((service) => {
             return (
                 <div key={"service" + service._id}>

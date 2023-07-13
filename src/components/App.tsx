@@ -93,7 +93,10 @@ const App: React.FC = () => {
             <SelectedForms form={form}/>
           </div>
         } {step === 3 &&
-          <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
+          <div className="twoSections">
+            <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
+            <SelectedForms form={form}/>
+          </div>
         } 
       </header>
     </div>

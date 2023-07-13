@@ -1,0 +1,16 @@
+.oneBarber {
+    width: 100%;
+    cursor: pointer;
+
+    .card {
+        input {
+            font-size: 1.1rem;
+            border: none;
+            background-color: white;
+        }
+
+        .description {
+            color: gray;
+        }
+    }
+}

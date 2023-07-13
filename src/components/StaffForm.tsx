@@ -1,4 +1,6 @@
-import '../styling/Location.scss';
+import { useState } from 'react';
+import '../styling/StaffForm.scss';
+import BarberCard from './BarberCard';
 
 interface Barber {
   _id: string;
@@ -14,14 +16,24 @@ interface Props {
 
 const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
   // This component will render 5 different form components, all of them will change state.
+  const [noPreferenceBarber, setNoPreferenceBarber] = useState<Barber>({
+    _id: "000",
+    first_name: "No",
+    last_name: "Preference",
+    phone_number: 0
+  })
   function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {
     event?.preventDefault();
     const target = event.target as typeof event.target & {
-        barber: { value: string };
+        id: string;
     };
-    console.log(target.barber.value);
+    console.log(target.id);
+    // If customer has no preference over barbers
+    if (target.id === "000") {
+      setFormBarber(noPreferenceBarber);
+    }
     for (let i = 0; i < availableStaff.length; i += 1) {
-        if (availableStaff[i]._id === target.barber.value) {
+        if (availableStaff[i]._id === target.id) {
             setFormBarber(availableStaff[i]);
             return;
         }
@@ -29,16 +41,14 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
   };
 
   return (
-    <form className="locationForm" onSubmit={onSubmitButton}>
+    <form className="staffForm">
         <h1 className='sectionAnnounce'>Select barber: </h1>
-        {availableStaff.map((barber) => {
-            return (
-                <div key={'barber' + barber._id}>
-                    <input type='radio' id={'barber' + barber._id} name='barber' value={barber._id}></input>
-                    <label htmlFor={'barber' + barber._id}>{barber.first_name + " " + barber.last_name}</label>
-                </div>
-        )})}
-        <button type="submit">Submit</button>
+        <div className='barbers'>
+          <BarberCard barber={noPreferenceBarber} handleChange={onSubmitButton} description={"Maximum availability"}/>
+          {availableStaff.map((barber) => {
+              return (<BarberCard barber={barber} handleChange={onSubmitButton} description={"Head Barber"}/>)
+          })}
+        </div>
     </form>
   );
 }

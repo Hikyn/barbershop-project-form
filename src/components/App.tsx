@@ -76,6 +76,10 @@ const App: React.FC = () => {
     setForm(copyForm);
     setStep(step + 1);
   }
+
+  const increaseStep = () => {
+    setStep(step + 1);
+  }
   useEffect(() => {
     console.log(form);
   }, [form]);
@@ -89,7 +93,7 @@ const App: React.FC = () => {
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&
           <div className="twoSections">
-            <ServicesForm form={form} setFormServices={setFormServices}/>
+            <ServicesForm form={form} setFormServices={setFormServices} increaseStep={increaseStep}/>
             <SelectedForms form={form}/>
           </div>
         } {step === 3 &&

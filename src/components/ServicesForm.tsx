@@ -34,10 +34,11 @@ interface Form {
 
 interface Props {
     form: Form;
+    increaseStep: () => void;
     setFormServices: (services: Service[], increaseStep: boolean) => void;
 }
 
-const ServicesForm: React.FC<Props> = ({ form, setFormServices }) => {
+const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) => {
   const [availableServices, setAvailableServices] = useState<Service[]>([]);
   const [hairServices, setHairServices] = useState<Service[]>([]);
   const [beardServices, setBeardServices] = useState<Service[]>([]);
@@ -65,17 +66,7 @@ const ServicesForm: React.FC<Props> = ({ form, setFormServices }) => {
 
   function onSubmitButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
-
-    let selected_services: Service[] = [];
-    for (let i = 0; i < checkboxes.length; i += 1) {
-        let node = checkboxes[i] as HTMLInputElement;
-        if (node.checked) {
-          selected_services.push(availableServices[i]);
-        }
-    }
-    
-    setFormServices(selected_services, true);
+    increaseStep();
   };
 
   useEffect(() => {

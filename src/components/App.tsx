@@ -4,6 +4,7 @@ import LocationForm from './LocationForm';
 import ServicesForm from './ServicesForm';
 import StaffForm from './StaffForm';
 import SelectedForms from './SelectedForms';
+import DateForm from './DateForm';
 
 interface Service {
   _id: string;
@@ -32,7 +33,10 @@ interface Form {
   selected_location?: Location;
   selected_services?: Service[];
   selected_barber?: Barber;
-  selected_date?: Date;
+  selected_day?: number;
+  selected_month?: number;
+  selected_year?: number;
+  selected_timeslot?: number;
 }
 
 const App: React.FC = () => {
@@ -48,7 +52,7 @@ const App: React.FC = () => {
       method: "GET"
     })
     const data = await res.json();
-    console.log(data)
+    //console.log(data)
     console.log("Requesting barbers")
     setAvailableStaff(data);
   }
@@ -77,6 +81,16 @@ const App: React.FC = () => {
     setStep(step + 1);
   }
 
+  const setFormTime = (day: Date, timeslot: number) => {
+    let copyForm: Form = {...form}
+    copyForm.selected_day = day.getDate();
+    copyForm.selected_month = day.getMonth() + 1;
+    copyForm.selected_year = day.getFullYear();
+    copyForm.selected_timeslot = timeslot;
+    setForm(copyForm);
+    setStep(step + 1);
+  }
+
   const increaseStep = () => {
     setStep(step + 1);
   }
@@ -99,6 +113,16 @@ const App: React.FC = () => {
         } {step === 3 &&
           <div className="twoSections">
             <StaffForm availableStaff={availableStaff} setFormBarber={setFormBarber}/>
+            <SelectedForms form={form}/>
+          </div>
+        } {step === 4 &&
+          <div className="twoSections">
+            <DateForm barber={form.selected_barber} setFormTime={setFormTime}/>
+            <SelectedForms form={form}/>
+          </div>
+        } {step === 5 &&
+          <div className="twoSections">
+            <DateForm barber={form.selected_barber} setFormTime={setFormTime}/>
             <SelectedForms form={form}/>
           </div>
         } 

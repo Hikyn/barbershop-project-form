@@ -15,7 +15,7 @@ interface Props {
 }
 
 const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
-  // This component will render 5 different form components, all of them will change state.
+
   const [noPreferenceBarber, setNoPreferenceBarber] = useState<Barber>({
     _id: "000",
     first_name: "No",
@@ -46,7 +46,7 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
         <div className='barbers'>
           <BarberCard barber={noPreferenceBarber} handleChange={onSubmitButton} description={"Maximum availability"}/>
           {availableStaff.map((barber) => {
-              return (<BarberCard barber={barber} handleChange={onSubmitButton} description={"Head Barber"}/>)
+              return (<BarberCard barber={barber} handleChange={onSubmitButton} description={"Head Barber"} key={barber._id}/>)
           })}
         </div>
     </form>

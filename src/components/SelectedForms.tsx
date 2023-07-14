@@ -29,7 +29,10 @@ interface Form {
   selected_location?: Location;
   selected_services?: Service[];
   selected_barber?: Barber;
-  selected_date?: Date;
+  selected_day?: number;
+  selected_month?: number;
+  selected_year?: number;
+  selected_timeslot?: number;
 }
 
 interface Props {
@@ -38,7 +41,21 @@ interface Props {
 
 const SelectedForms: React.FC<Props> = ({ form }) => {
   const [total, setTotal] = useState(0);
+  const [monthes, setMonthes] = useState(['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
 
+  function getMinutes(timeslot: number) {
+    return (String(timeslot).slice(-2));
+}
+
+  function getHours(timeslot: number) {
+      let length = String(timeslot).length;
+      
+      if (length > 3) {
+          return String(timeslot).slice(0, 2);
+      } else {
+          return String(timeslot).slice(0, 1);
+      }
+  }
   useEffect(() => {
     function calculateTotal(){
       let sum = 0;
@@ -56,10 +73,16 @@ const SelectedForms: React.FC<Props> = ({ form }) => {
       <h2>{form.selected_location?.name}</h2>
       <div className='description'>{form.selected_location?.location}, {form.selected_location?.map_index}</div>
       <hr></hr>
+      {form.selected_timeslot !== undefined && form.selected_month !== undefined &&
+            <>
+              <div className='timeDescription'>{form.selected_day} of {monthes[form.selected_month]} {form.selected_year} at {getHours(form.selected_timeslot)}:{getMinutes(form.selected_timeslot)}</div>
+              <hr></hr>
+            </>
+      }
       {Number(form.selected_services?.length) > 0 ?
         form.selected_services?.map((service) => {
           return (
-            <div className='flex-column'>
+            <div className='flex-column' key={service.name}>
               <div>
                 <div>{service.name}</div>
                 <div className='description'>{service.time} min</div>

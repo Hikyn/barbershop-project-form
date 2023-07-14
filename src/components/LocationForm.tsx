@@ -65,7 +65,7 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
       <div className="barbershops">
       {barbershops.map((location) => {
         return (
-          <LocationCard location={location} onSubmitButton={onSubmitButton} handleClick={handleClick} />
+          <LocationCard location={location} onSubmitButton={onSubmitButton} handleClick={handleClick} key={location._id} />
       )})}
       </div>
       <button type="submit" hidden>Submit</button>

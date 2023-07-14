@@ -29,7 +29,12 @@ interface Form {
   selected_location?: Location;
   selected_services?: Service[];
   selected_barber?: Barber;
-  selected_date?: Date;
+  selected_date?: {
+    day: number;
+    month: number;
+    year: number;
+    timeslot: number
+  };
 }
 
 interface Props {
@@ -45,14 +50,14 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
   const [facialServices, setFacialServices] = useState<Service[]>([]);
   const [shaveServices, setShaveServices] = useState<Service[]>([]);
   const [packageServices, setPackageServices] = useState<Service[]>([]);
-  // This component will render 5 different form components, all of them will change state.
+
   function handleChange(e: React.FormEvent<HTMLFormElement>) {
     let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
 
     let selected_services: Service[] = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
         let node = checkboxes[i] as HTMLInputElement;
-        console.log(node)
+
         if (node.checked) {
           let service = availableServices.find((service) => service._id === node.id)
           if (service !== undefined) {
@@ -123,7 +128,7 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
         <div className='card'>
           {hairServices.map((service) => {
               return (
-                <ServiceCard service={service} onChange={handleChange}/>
+                <ServiceCard service={service} onChange={handleChange} key={service._id}/>
           )})}
         </div>
 
@@ -131,7 +136,7 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
         <div className='card'>
           {beardServices.map((service) => {
               return (
-                <ServiceCard service={service} onChange={handleChange}/>
+                <ServiceCard service={service} onChange={handleChange} key={service._id}/>
           )})}
         </div>
 
@@ -139,7 +144,7 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
         <div className='card'>
           {facialServices.map((service) => {
               return (
-                <ServiceCard service={service} onChange={handleChange}/>
+                <ServiceCard service={service} onChange={handleChange} key={service._id}/>
           )})}
         </div>
 
@@ -147,7 +152,7 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
         <div className='card'>
           {shaveServices.map((service) => {
               return (
-                <ServiceCard service={service} onChange={handleChange}/>
+                <ServiceCard service={service} onChange={handleChange} key={service._id}/>
           )})}
         </div>
 
@@ -155,7 +160,7 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
         <div className='card'>
           {packageServices.map((service) => {
               return (
-                <ServiceCard service={service} onChange={handleChange}/>
+                <ServiceCard service={service} onChange={handleChange} key={service._id}/>
           )})}
         </div>
         {Number(form.selected_services?.length) > 0 &&

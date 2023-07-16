@@ -27,7 +27,6 @@ const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
     const target = event.target as typeof event.target & {
         id: string;
     };
-    console.log(target.id);
     // If customer has no preference over barbers
     if (target.id === "000") {
       setFormBarber(noPreferenceBarber);

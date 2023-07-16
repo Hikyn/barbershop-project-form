@@ -71,7 +71,7 @@ const DateForm: React.FC<Props> = ( {barber, setFormTime} ) => {
 
   return (
     <form className="dateForm">
-        <h1 className='sectionAnnounce'>Select date: </h1>
+        <h1 className='sectionAnnounce'>Select time: </h1>
         <div className='dateSelector'>
             <button className='back' onClick={decreaseWeek}>&lt;-</button>
                 {selectedWeek.map((day) => {

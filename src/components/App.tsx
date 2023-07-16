@@ -5,6 +5,7 @@ import ServicesForm from './ServicesForm';
 import StaffForm from './StaffForm';
 import SelectedForms from './SelectedForms';
 import DateForm from './DateForm';
+import ContactForm from './ContactForm';
 
 interface Service {
   _id: string;
@@ -22,6 +23,13 @@ interface Barber {
   phone_number: number;
 }
 
+interface Customer {
+  _id: number | undefined;
+  first_name: string,
+  last_name: string,
+  phone_number: number
+}
+
 interface Location {
   _id: string,
   location: string,
@@ -37,6 +45,7 @@ interface Form {
   selected_month?: number;
   selected_year?: number;
   selected_timeslot?: number;
+  customer?: Customer;
 }
 
 const App: React.FC = () => {
@@ -81,6 +90,16 @@ const App: React.FC = () => {
     setStep(step + 1);
   }
 
+  const setFormCustomer = async (customer: Customer) => {
+    let copyForm: Form = {...form}
+    copyForm.customer = customer;
+    setForm(copyForm);
+    if (form.customer !== undefined) {
+      let id = createCustomer(form.customer);
+      id.then(id => createAppointment(id));
+    } 
+  }
+
   const setFormTime = (day: Date, timeslot: number) => {
     let copyForm: Form = {...form}
     copyForm.selected_day = day.getDate();
@@ -94,9 +113,53 @@ const App: React.FC = () => {
   const increaseStep = () => {
     setStep(step + 1);
   }
+
+  
   useEffect(() => {
     console.log(form);
   }, [form]);
+
+  const createCustomer = async (customer: Customer) => {
+    const url = new URL(`http://localhost:3000/customers/`);
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'}, 
+      body: JSON.stringify(customer)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Creating customer");
+      console.log(`Customer ID: ${data}`);
+      return data;
+    })
+    console.log(res);
+    return res;
+  }
+  const createAppointment = async (id: any) => {
+    console.log(`Creating appointment for customer ID: ${id}`)
+    const appointment = {
+      date: {
+        day: form.selected_day,
+        month: form.selected_month,
+        year: form.selected_year
+      },
+      location: form.selected_location,
+      barber: form.selected_barber,
+      services: form.selected_services,
+      customer_id: id,
+      status: 'Scheduled', 
+      timeslot: Number(form.selected_timeslot)
+    }
+    const url = new URL(`http://localhost:3000/appointments`);
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'}, 
+      body: JSON.stringify(appointment)
+    })
+    const data = await res.json();
+    //console.log(data)
+    console.log("Creating appointment")
+  }
 
   // This component will render 5 different form components, all of them will change state.
   return (
@@ -122,7 +185,7 @@ const App: React.FC = () => {
           </div>
         } {step === 5 &&
           <div className="twoSections">
-            <DateForm barber={form.selected_barber} setFormTime={setFormTime}/>
+            <ContactForm setFormCustomer={setFormCustomer}/>
             <SelectedForms form={form}/>
           </div>
         } 

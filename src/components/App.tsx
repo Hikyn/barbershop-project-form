@@ -115,6 +115,10 @@ const App: React.FC = () => {
     setStep(step + 1);
   }
 
+  const decreaseStep = () => {
+    setStep(step - 1);
+  }
+
   
   useEffect(() => {
     //console.log(form);
@@ -173,7 +177,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {step <= 5 ? <p>Step {step} of 5</p> : <></>}
+        {step <= 5 ? 
+        <div className='flex-row'>
+          <button onClick={decreaseStep}>&lt;</button>
+          <p>Step {step} of 5</p> 
+        </div>
+        : <></>}
         {step === 1 &&
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&

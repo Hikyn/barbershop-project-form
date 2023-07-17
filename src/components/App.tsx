@@ -177,7 +177,10 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {step <= 5 ? 
+        { step === 1 && 
+          <p>Step {step} of 5</p> 
+        }
+        {step >= 2 && step <= 5 ? 
         <div className='flex-row'>
           <button onClick={decreaseStep}>&lt;</button>
           <p>Step {step} of 5</p> 

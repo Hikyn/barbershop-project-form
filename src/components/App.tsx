@@ -6,6 +6,7 @@ import StaffForm from './StaffForm';
 import SelectedForms from './SelectedForms';
 import DateForm from './DateForm';
 import ContactForm from './ContactForm';
+import AppointmentConfirmed from './AppointmentConfirmed';
 
 interface Service {
   _id: string;
@@ -53,7 +54,7 @@ const App: React.FC = () => {
   const [form, setForm] = useState<Form>({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [availableStaff, setAvailableStaff] = useState<Barber[]>([]);
-
+  const [isFormSent, setIsFormSent] = useState(false);
 
   async function getBarbers(barbershopId: string){
     const url = new URL(`http:/localhost:3000/barbershops/${barbershopId}/barbers`);
@@ -116,8 +117,14 @@ const App: React.FC = () => {
 
   
   useEffect(() => {
-    console.log(form);
-  }, [form]);
+    //console.log(form);
+    if (form.customer !== undefined && isFormSent === false) {
+      let id = createCustomer(form.customer);
+      id.then(id => createAppointment(id));
+      setIsFormSent(true);
+      setStep(step + 1);
+    }
+  }, [form, isFormSent]);
 
   const createCustomer = async (customer: Customer) => {
     const url = new URL(`http://localhost:3000/customers/`);
@@ -157,15 +164,16 @@ const App: React.FC = () => {
       body: JSON.stringify(appointment)
     })
     const data = await res.json();
-    //console.log(data)
-    console.log("Creating appointment")
+    if (data.isCreated === true) {
+      console.log("Appointment created")
+    }
   }
 
   // This component will render 5 different form components, all of them will change state.
   return (
     <div className="App">
       <header className="App-header">
-        <p>Step {step} of 5</p>
+        {step <= 5 ? <p>Step {step} of 5</p> : <></>}
         {step === 1 &&
           <LocationForm setFormLocation={setFormLocation}/>
         } {step === 2 &&
@@ -188,7 +196,9 @@ const App: React.FC = () => {
             <ContactForm setFormCustomer={setFormCustomer}/>
             <SelectedForms form={form}/>
           </div>
-        } 
+        }  {step === 6 && 
+          <AppointmentConfirmed form={form}/>
+        }
       </header>
     </div>
   );

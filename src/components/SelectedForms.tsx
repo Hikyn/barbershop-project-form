@@ -1,42 +1,10 @@
 import { useEffect, useState } from 'react';
 import '../styling/SelectedForms.scss';
+import { IForm } from '../interfaces/interfaces';
 import ServiceCard from './ServiceCard'; 
 
-interface Service {
-  _id: string;
-  name: string;
-  price: number;
-  time: number;
-  category: string;
-  description: string;
-}
-
-interface Barber {
-  _id: string;
-  first_name: string;
-  last_name: string;
-  phone_number: number;
-}
-
-interface Location {
-  _id: string,
-  location: string,
-  map_index: number,
-  name: string
-}
-
-interface Form {
-  selected_location?: Location;
-  selected_services?: Service[];
-  selected_barber?: Barber;
-  selected_day?: number;
-  selected_month?: number;
-  selected_year?: number;
-  selected_timeslot?: number;
-}
-
 interface Props {
-    form: Form;
+    form: IForm;
 }
 
 const SelectedForms: React.FC<Props> = ({ form }) => {

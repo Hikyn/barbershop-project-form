@@ -1,22 +1,16 @@
 import { useState } from 'react';
 import '../styling/StaffForm.scss';
 import BarberCard from './BarberCard';
-
-interface Barber {
-  _id: string;
-  first_name: string;
-  last_name: string;
-  phone_number: number;
-}
+import { IBarber } from '../interfaces/interfaces';
 
 interface Props {
-    availableStaff: Barber[];
-    setFormBarber: (barber: Barber) => void;
+    availableStaff: IBarber[];
+    setFormBarber: (barber: IBarber) => void;
 }
 
 const StaffForm: React.FC<Props> = ({ availableStaff, setFormBarber }) => {
 
-  const [noPreferenceBarber, setNoPreferenceBarber] = useState<Barber>({
+  const [noPreferenceBarber, setNoPreferenceBarber] = useState<IBarber>({
     _id: "000",
     first_name: "No",
     last_name: "Preference",

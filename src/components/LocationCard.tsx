@@ -1,18 +1,12 @@
-import { FormEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styling/Location.scss';
-import { json } from 'stream/consumers';
+import { ILocation } from '../interfaces/interfaces';
 import barbershopFront from '../images/barbershop-front.png';
 import barbershopFront2 from '../images/barbershop-front2.png';
 
-interface Location {
-  _id: string,
-  location: string,
-  map_index: number,
-  name: string
-}
 
 interface Props {
-    location: Location,
+    location: ILocation,
     onSubmitButton: any
     handleClick: any
 }

@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
+import { IBarber } from '../interfaces/interfaces';
 import '../styling/DateForm.scss';
 import DayCard from './DayCard';
 import DayDetailed from './DayDetailed';
 
-interface Barber {
-    _id: string;
-    first_name: string;
-    last_name: string;
-    phone_number: number;
-  }
-
 interface Props {
-    barber: Barber | undefined;
+    barber: IBarber | undefined;
     setFormTime: (date: Date, timeslot: number) => void;
 }
 

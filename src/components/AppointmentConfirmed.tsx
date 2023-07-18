@@ -1,48 +1,9 @@
 import { useState } from 'react';
+import { IForm } from '../interfaces/interfaces';
 import '../styling/AppointmentConfirmed.scss';
-interface Service {
-    _id: string;
-    name: string;
-    price: number;
-    time: number;
-    category: string;
-    description: string;
-  }
-  
-interface Barber {
-    _id: string;
-    first_name: string;
-    last_name: string;
-    phone_number: number;
-  }
-  
-interface Customer {
-    _id: number | undefined;
-    first_name: string,
-    last_name: string,
-    phone_number: number
-  }
-
-interface Location {
-    _id: string,
-    location: string,
-    map_index: number,
-    name: string
-  }
-
-interface Form {
-    selected_location?: Location;
-    selected_services?: Service[];
-    selected_barber?: Barber;
-    selected_day?: number;
-    selected_month?: number;
-    selected_year?: number;
-    selected_timeslot?: number;
-    customer?: Customer;
-  }
 
 interface Props {
-    form: Form;
+    form: IForm;
 }
 
 const AppointmentConfirmed: React.FC<Props> = ({ form }) => {

@@ -1,21 +1,15 @@
 import { FormEventHandler, useEffect, useState } from 'react';
+import { ILocation } from '../interfaces/interfaces';
 import '../styling/Location.scss';
 import { json } from 'stream/consumers';
 import LocationCard from './LocationCard'; 
 
 interface Props {
-    setFormLocation: (location: Location) => void;
-}
-
-interface Location {
-  _id: string,
-  location: string,
-  map_index: number,
-  name: string
+    setFormLocation: (location: ILocation) => void;
 }
 
 const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
-  const [barbershops, setBarbershops] = useState<Location[]>([]);
+  const [barbershops, setBarbershops] = useState<ILocation[]>([]);
 
   // This component will render 5 different form components, all of them will change state.
   function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {

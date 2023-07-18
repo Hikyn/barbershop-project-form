@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { IBarber, ICustomer, IForm, ILocation, IService } from '../interfaces/interfaces';
 import '../styling/App.scss';
 import LocationForm from './LocationForm';
 import ServicesForm from './ServicesForm';
@@ -8,52 +9,11 @@ import DateForm from './DateForm';
 import ContactForm from './ContactForm';
 import AppointmentConfirmed from './AppointmentConfirmed';
 
-interface Service {
-  _id: string;
-  name: string;
-  price: number;
-  time: number;
-  category: string;
-  description: string;
-}
-
-interface Barber {
-  _id: string;
-  first_name: string;
-  last_name: string;
-  phone_number: number;
-}
-
-interface Customer {
-  _id: number | undefined;
-  first_name: string,
-  last_name: string,
-  phone_number: number
-}
-
-interface Location {
-  _id: string,
-  location: string,
-  map_index: number,
-  name: string
-}
-
-interface Form {
-  selected_location?: Location;
-  selected_services?: Service[];
-  selected_barber?: Barber;
-  selected_day?: number;
-  selected_month?: number;
-  selected_year?: number;
-  selected_timeslot?: number;
-  customer?: Customer;
-}
-
 const App: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState<Form>({});
+  const [form, setForm] = useState<IForm>({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [availableStaff, setAvailableStaff] = useState<Barber[]>([]);
+  const [availableStaff, setAvailableStaff] = useState<IBarber[]>([]);
   const [isFormSent, setIsFormSent] = useState(false);
 
   async function getBarbers(barbershopId: string){
@@ -67,16 +27,16 @@ const App: React.FC = () => {
     setAvailableStaff(data);
   }
 
-  const setFormLocation = (location: Location) => {
-    let copyForm: Form = {...form}
+  const setFormLocation = (location: ILocation) => {
+    let copyForm: IForm = {...form}
     copyForm.selected_location = location;
     setForm(copyForm);
     setStep(step + 1);
     getBarbers(location._id);
   }
 
-  const setFormServices = (services: Service[], increaseStep: boolean) => {
-    let copyForm: Form = {...form}
+  const setFormServices = (services: IService[], increaseStep: boolean) => {
+    let copyForm: IForm = {...form}
     copyForm.selected_services = services;
     setForm(copyForm);
     if (increaseStep) {
@@ -84,15 +44,15 @@ const App: React.FC = () => {
     }
   }
 
-  const setFormBarber = (barber: Barber) => {
-    let copyForm: Form = {...form}
+  const setFormBarber = (barber: IBarber) => {
+    let copyForm: IForm = {...form}
     copyForm.selected_barber = barber;
     setForm(copyForm);
     setStep(step + 1);
   }
 
-  const setFormCustomer = async (customer: Customer) => {
-    let copyForm: Form = {...form}
+  const setFormCustomer = async (customer: ICustomer) => {
+    let copyForm: IForm = {...form}
     copyForm.customer = customer;
     setForm(copyForm);
     if (form.customer !== undefined) {
@@ -102,7 +62,7 @@ const App: React.FC = () => {
   }
 
   const setFormTime = (day: Date, timeslot: number) => {
-    let copyForm: Form = {...form}
+    let copyForm: IForm = {...form}
     copyForm.selected_day = day.getDate();
     copyForm.selected_month = day.getMonth() + 1;
     copyForm.selected_year = day.getFullYear();
@@ -130,7 +90,7 @@ const App: React.FC = () => {
     }
   }, [form, isFormSent]);
 
-  const createCustomer = async (customer: Customer) => {
+  const createCustomer = async (customer: ICustomer) => {
     const url = new URL(`http://localhost:3000/customers/`);
     const res = await fetch(url, {
       method: "POST",

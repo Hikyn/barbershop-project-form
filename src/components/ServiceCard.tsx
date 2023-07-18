@@ -1,16 +1,8 @@
 import '../styling/ServiceCard.scss';
-
-interface Service {
-    _id: string;
-    name: string;
-    price: number;
-    time: number;
-    category: string;
-    description: string;
-  }
+import { IService } from '../interfaces/interfaces';
 
 interface Props {
-    service: Service,
+    service: IService,
     onChange: (e: any) => void;
 }
 

@@ -1,60 +1,26 @@
 import '../styling/ServicesForm.scss';
-import { FormEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { IForm, IService } from '../interfaces/interfaces';
 import ServiceCard from './ServiceCard'; 
 
-interface Service {
-  _id: string;
-  name: string;
-  price: number;
-  time: number;
-  category: string;
-  description: string;
-}
-
-interface Barber {
-  _id: string;
-  first_name: string;
-  last_name: string;
-  phone_number: number;
-}
-
-interface Location {
-  _id: string,
-  location: string,
-  map_index: number,
-  name: string
-}
-
-interface Form {
-  selected_location?: Location;
-  selected_services?: Service[];
-  selected_barber?: Barber;
-  selected_date?: {
-    day: number;
-    month: number;
-    year: number;
-    timeslot: number
-  };
-}
-
 interface Props {
-    form: Form;
+    form: IForm;
     increaseStep: () => void;
-    setFormServices: (services: Service[], increaseStep: boolean) => void;
+    setFormServices: (services: IService[], increaseStep: boolean) => void;
 }
 
 const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) => {
-  const [availableServices, setAvailableServices] = useState<Service[]>([]);
-  const [hairServices, setHairServices] = useState<Service[]>([]);
-  const [beardServices, setBeardServices] = useState<Service[]>([]);
-  const [facialServices, setFacialServices] = useState<Service[]>([]);
-  const [shaveServices, setShaveServices] = useState<Service[]>([]);
-  const [packageServices, setPackageServices] = useState<Service[]>([]);
+  const [availableServices, setAvailableServices] = useState<IService[]>([]);
+  const [hairServices, setHairServices] = useState<IService[]>([]);
+  const [beardServices, setBeardServices] = useState<IService[]>([]);
+  const [facialServices, setFacialServices] = useState<IService[]>([]);
+  const [shaveServices, setShaveServices] = useState<IService[]>([]);
+  const [packageServices, setPackageServices] = useState<IService[]>([]);
 
   function handleChange(e: React.FormEvent<HTMLFormElement>) {
     let checkboxes: NodeList = document.querySelectorAll('.checkbox-round');
 
-    let selected_services: Service[] = [];
+    let selected_services: IService[] = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
         let node = checkboxes[i] as HTMLInputElement;
 
@@ -93,11 +59,11 @@ const ServicesForm: React.FC<Props> = ({ form, increaseStep, setFormServices }) 
   useEffect(() => {
     // Hook for updating services categories when we finally receive them from REST api
     function getServicesCategories() {
-      let hairArray: Service[] = [];
-      let beardArray: Service[] = [];
-      let facialArray: Service[] = [];
-      let shaveArray: Service[] = [];
-      let packageArray: Service[] = [];
+      let hairArray: IService[] = [];
+      let beardArray: IService[] = [];
+      let facialArray: IService[] = [];
+      let shaveArray: IService[] = [];
+      let packageArray: IService[] = [];
       availableServices.forEach((service) => {
         if (service.category === "Hair") {
           hairArray.push(service);

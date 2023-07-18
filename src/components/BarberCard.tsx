@@ -1,14 +1,8 @@
 import '../styling/BarberCard.scss';
-
-interface Barber {
-    _id: string;
-    first_name: string;
-    last_name: string;
-    phone_number: number;
-}
+import { IBarber } from '../interfaces/interfaces';
 
 interface Props {
-    barber: Barber;
+    barber: IBarber;
     description: string;
     handleChange: (event: any) => void;
 }

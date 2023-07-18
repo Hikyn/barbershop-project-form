@@ -1,14 +1,8 @@
 import '../styling/ContactForm.scss';
-
-interface Customer {
-    _id: number | undefined;
-    first_name: string,
-    last_name: string,
-    phone_number: number
-  }
+import { ICustomer } from '../interfaces/interfaces';
 
 interface Props {
-    setFormCustomer: (customer: Customer) => void;
+    setFormCustomer: (customer: ICustomer) => void;
 }
 
 
@@ -32,7 +26,7 @@ const ContactForm: React.FC<Props> = ({ setFormCustomer }) => {
             lastname: { value: string };
             phoneNumber: { value: number };
         };
-        let customer: Customer = {
+        let customer: ICustomer = {
             _id: undefined,
             first_name: target.name.value,
             last_name: target.lastname.value,

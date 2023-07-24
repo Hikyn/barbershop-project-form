@@ -35,6 +35,8 @@ This is a page for making appointments. Users will be navigated through 5 steps 
 4. Choosing timeslot
 5. Sign up to create appointment
 
+It is part of a [barbershop project](https://github.com/Hikyn/barbershop-project/).
+
 ## Problems and their solutions:
 ### Typescript:
 #### Changing state of a form

@@ -5,10 +5,13 @@ import { IBarber, ICustomer, IForm, ILocation, IService } from '../interfaces/in
 interface Props {
     day: Date;
     barber: IBarber | undefined;
+    barbershop: ILocation | undefined;
     setFormTime: (date: Date, timeslot: number) => void;
+    setFormBarber: (barber: IBarber) => void;
+    setFormTimeBarber: (date: Date, timeslot: number, barber: IBarber) => void;
 }
 
-const DayDetailed: React.FC<Props> = ({ day, barber, setFormTime }) => {
+const DayDetailed: React.FC<Props> = ({ day, barber, barbershop, setFormTime, setFormBarber, setFormTimeBarber }) => {
     const [timeslots, setTimeslots] = useState([]);
     const [isWorking, setIsWorking] = useState(false);
 
@@ -28,9 +31,30 @@ const DayDetailed: React.FC<Props> = ({ day, barber, setFormTime }) => {
     }
 
     function handleClick(e: any) {
+        async function getRandomBarber(){
+            if (barbershop !== undefined) {
+                const url = new URL(`http:/localhost:3000/barbers/timeslots/${barbershop._id}/${day.getDate()}/${day.getMonth()+1}/${day.getFullYear()}/${e.target.value}/randomBarber`);
+                const res = await fetch(url, {
+                method: "GET"
+                }).then(barber => barber.json());
+                //console.log(res);
+                setFormTimeBarber(day, e.target.value, res);
+            } else {
+                throw new Error('Failed to select random barber')
+            }
+        }
+
         e.preventDefault();
-        setFormTime(day, e.target.value);
+        if (barber !== undefined && barber._id === "000") {
+            getRandomBarber();
+            console.log('Selecting random barber');
+        } else {
+            console.log('Debug 51')
+            setFormTime(day, e.target.value);
+        }
+        
     }
+
     useEffect(() => {
         async function getTimeslot(){
             if (barber !== undefined) {
@@ -43,8 +67,25 @@ const DayDetailed: React.FC<Props> = ({ day, barber, setFormTime }) => {
                 throw new Error('Selected barber not found')
             }
         }
+
+        async function getAllBarbersTimeslots(){
+            if (barbershop !== undefined) {
+                const url = new URL(`http:/localhost:3000/barbers/timeslots/${barbershop._id}/${day.getDate()}/${day.getMonth()+1}/${day.getFullYear()}`);
+                const res = await fetch(url, {
+                method: "GET"
+                })
+                setTimeslots(await res.json());
+            } else {
+                throw new Error('Selected barbershop not found')
+            }
+        }
         setTimeslots([]);
-        getTimeslot();
+        if (barber !== undefined && barber._id === "000") {
+            getAllBarbersTimeslots();
+        } else {
+            getTimeslot();
+        }
+
     }, [barber, day])
 
     useEffect(() => {

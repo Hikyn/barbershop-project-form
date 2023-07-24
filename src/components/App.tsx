@@ -71,6 +71,17 @@ const App: React.FC = () => {
     setStep(step + 1);
   }
 
+  const setFormTimeBarber = (day: Date, timeslot: number, barber: IBarber) => {
+    let copyForm: IForm = {...form}
+    copyForm.selected_barber = barber;
+    copyForm.selected_day = day.getDate();
+    copyForm.selected_month = day.getMonth() + 1;
+    copyForm.selected_year = day.getFullYear();
+    copyForm.selected_timeslot = timeslot;
+    setForm(copyForm);
+    setStep(step + 1);
+  }
+
   const increaseStep = () => {
     setStep(step + 1);
   }
@@ -81,7 +92,7 @@ const App: React.FC = () => {
 
   
   useEffect(() => {
-    //console.log(form);
+    console.log(form);
     if (form.customer !== undefined && isFormSent === false) {
       let id = createCustomer(form.customer);
       id.then(id => createAppointment(id));
@@ -160,7 +171,7 @@ const App: React.FC = () => {
           </div>
         } {step === 4 &&
           <div className="twoSections">
-            <DateForm barber={form.selected_barber} setFormTime={setFormTime}/>
+            <DateForm barbershop={form.selected_location} barber={form.selected_barber} setFormBarber={setFormBarber} setFormTimeBarber={setFormTimeBarber} setFormTime={setFormTime}/>
             <SelectedForms form={form}/>
           </div>
         } {step === 5 &&

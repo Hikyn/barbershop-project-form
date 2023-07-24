@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import { IBarber } from '../interfaces/interfaces';
+import { IBarber, ILocation } from '../interfaces/interfaces';
 import '../styling/DateForm.scss';
 import DayCard from './DayCard';
 import DayDetailed from './DayDetailed';
 
 interface Props {
     barber: IBarber | undefined;
+    barbershop: ILocation | undefined;
     setFormTime: (date: Date, timeslot: number) => void;
+    setFormBarber: (barber: IBarber) => void;
+    setFormTimeBarber: (date: Date, timeslot: number, barber: IBarber) => void;
 }
 
-const DateForm: React.FC<Props> = ( {barber, setFormTime} ) => {
+const DateForm: React.FC<Props> = ( {barber, barbershop, setFormTime, setFormBarber, setFormTimeBarber} ) => {
   // Gets current date and renders 5 days including today
   const [currentDate, setCurrentDate] = useState(new Date());
   const [dateArray, setDateArray] = useState<Date[]>(createDateArray(21));
@@ -76,7 +79,7 @@ const DateForm: React.FC<Props> = ( {barber, setFormTime} ) => {
             <button className='forward' onClick={increaseWeek}>-&gt;</button>
         </div>
         {selectedDate !== undefined && 
-            <DayDetailed day={selectedDate} barber={barber} setFormTime={setFormTime}/>
+            <DayDetailed day={selectedDate} barber={barber} setFormBarber={setFormBarber} setFormTimeBarber={setFormTimeBarber} barbershop={barbershop} setFormTime={setFormTime}/>
         }
     </form>
   );

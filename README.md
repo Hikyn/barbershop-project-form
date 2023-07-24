@@ -15,6 +15,18 @@
   <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white" />
 </a>
 
+<details>
+<summary>Mobile version</summary>
+<br>
+<img src="src/images/preview.gif " height="500"/>
+</details>
+
+<details>
+<summary>Desktop version</summary>
+<br>
+<img src="src/images/previewDesktop.gif " height="500"/>
+</details>
+
 This is a page for making appointments. Users will be navigated through 5 steps of making appointment.
 
 1. Choosing location

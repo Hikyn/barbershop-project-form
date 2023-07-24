@@ -1,5 +1,21 @@
 # Appointment form
-HTML/SCSS/TS/React This is a page for making appointments. Users will be navigated through 5 steps of making appointment.
+<a href="https://www.typescriptlang.org/">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+</a>
+
+<a href="https://reactjs.org/">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+</a>
+
+<a href="https://en.wikipedia.org/wiki/HTML5">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+</a>
+
+<a href="https://en.wikipedia.org/wiki/CSS">
+  <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white" />
+</a>
+
+This is a page for making appointments. Users will be navigated through 5 steps of making appointment.
 
 1. Choosing location
 2. Selecting services

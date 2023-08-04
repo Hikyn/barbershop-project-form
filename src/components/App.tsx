@@ -8,7 +8,6 @@ import SelectedForms from './SelectedForms';
 import DateForm from './DateForm';
 import ContactForm from './ContactForm';
 import AppointmentConfirmed from './AppointmentConfirmed';
-import { resolve } from 'path';
 
 const App: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -96,7 +95,6 @@ const App: React.FC = () => {
     console.log(form);
     if (form.customer !== undefined && isFormSent === false) {
       let id = createCustomer(form.customer);
-      let isSent = false;
       id.then(id => createAppointment(id))
       .then(isWorked => {
         if (isWorked) {
@@ -104,6 +102,7 @@ const App: React.FC = () => {
           setStep(step + 1);
         }});
     }
+
   }, [form, isFormSent]);
 
   const createCustomer = async (customer: ICustomer) => {

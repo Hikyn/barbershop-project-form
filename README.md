@@ -38,6 +38,8 @@ This is a page for making appointments. Users will be navigated through 5 steps 
 
 It is part of a [barbershop project](https://github.com/Hikyn/barbershop-project/).
 
+<b>View my full portfolio</b>: https://hikyn.dev/
+
 ## Problems and their solutions:
 
 ### Typescript:

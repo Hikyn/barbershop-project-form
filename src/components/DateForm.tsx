@@ -3,6 +3,7 @@ import { IBarber, ILocation } from "../interfaces/interfaces";
 import "../styling/DateForm.scss";
 import DayCard from "./DayCard";
 import DayDetailed from "./DayDetailed";
+import { addDays } from "../__helpers__/utils";
 
 interface Props {
   barber: IBarber | undefined;
@@ -25,12 +26,6 @@ const DateForm: React.FC<Props> = ({
   const [selectedWeekIndex, setSelectedWeekIndex] = useState(0);
   const [selectedWeek, setSelectedWeek] = useState<Date[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
-  function addDays(date: Date, days: number) {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
 
   function createDateArray(numberOfDays: number) {
     let result = [];

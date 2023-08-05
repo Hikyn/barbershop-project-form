@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../styling/SelectedForms.scss";
 import { IForm } from "../interfaces/interfaces";
 import ServiceCard from "./ServiceCard";
+import { getMinutes, getHours } from "../__helpers__/utils";
 
 interface Props {
   form: IForm;
@@ -24,19 +25,6 @@ const SelectedForms: React.FC<Props> = ({ form }) => {
     "December",
   ]);
 
-  function getMinutes(timeslot: number) {
-    return String(timeslot).slice(-2);
-  }
-
-  function getHours(timeslot: number) {
-    let length = String(timeslot).length;
-
-    if (length > 3) {
-      return String(timeslot).slice(0, 2);
-    } else {
-      return String(timeslot).slice(0, 1);
-    }
-  }
   useEffect(() => {
     function calculateTotal() {
       let sum = 0;

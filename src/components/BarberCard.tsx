@@ -8,6 +8,8 @@ interface Props {
 }
 
 const BarberCard: React.FC<Props> = ({ barber, description, handleChange }) => {
+  // Component that renders information about current barber
+  
   return (
     <label htmlFor={barber._id} className="oneBarber">
       <div key={"barber" + barber._id} className="card">

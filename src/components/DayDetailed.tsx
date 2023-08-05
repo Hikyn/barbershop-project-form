@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import "../styling/DayDetailed.scss";
+import { getMinutes, getHours } from "../__helpers__/utils";
 import {
   IBarber,
-  ICustomer,
-  IForm,
-  ILocation,
-  IService,
+  ILocation
 } from "../interfaces/interfaces";
 
 interface Props {
@@ -27,20 +25,6 @@ const DayDetailed: React.FC<Props> = ({
 }) => {
   const [timeslots, setTimeslots] = useState([]);
   const [isWorking, setIsWorking] = useState(false);
-
-  function getMinutes(timeslot: number) {
-    return String(timeslot).slice(-2);
-  }
-
-  function getHours(timeslot: number) {
-    let length = String(timeslot).length;
-
-    if (length > 3) {
-      return String(timeslot).slice(0, 2);
-    } else {
-      return String(timeslot).slice(0, 1);
-    }
-  }
 
   function handleClick(e: any) {
     async function getRandomBarber() {

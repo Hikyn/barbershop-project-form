@@ -6,18 +6,8 @@ interface Props {
 }
 
 const ContactForm: React.FC<Props> = ({ setFormCustomer }) => {
-  /* function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {
-        event?.preventDefault();
-        const target = event.target as typeof event.target & {
-            location: { value: string };
-        };
-        //console.log(target.location.value);
-        barbershops.forEach(barbershop => {
-          if (barbershop._id === target.location.value) {
-            setFormLocation(barbershop);
-          }
-        })
-      }; */
+  // Component for rendering Contact Form, which creates customer in database
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const target = event.target as typeof event.target & {

@@ -16,6 +16,8 @@ import ContactForm from "./ContactForm";
 import AppointmentConfirmed from "./AppointmentConfirmed";
 
 const App: React.FC = () => {
+  // Main component that renders other components based on current step
+  
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<IForm>({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

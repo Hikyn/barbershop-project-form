@@ -1,23 +1,23 @@
 .dayCard {
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 15%;
-    width: Min(5rem);
-    height: Min(5rem);
-    cursor: pointer;
-    transition: all 0.2s;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 15%;
+  width: Min(5rem);
+  height: Min(5rem);
+  cursor: pointer;
+  transition: all 0.2s;
 
-    &.selected {
-        background-color: rgba(0, 0, 255, 0.158);
-    }
-    &:hover {
-        background-color: rgba(0, 0, 255, 0.322);
-    }
-    .month {
-        color: gray;
-    }
+  &.selected {
+    background-color: rgba(0, 0, 255, 0.158);
+  }
+  &:hover {
+    background-color: rgba(0, 0, 255, 0.322);
+  }
+  .month {
+    color: gray;
+  }
 
-    .date {
-        font-size: 1.3em;
-    }
+  .date {
+    font-size: 1.3em;
+  }
 }

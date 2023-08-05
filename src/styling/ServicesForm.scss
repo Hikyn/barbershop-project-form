@@ -3,87 +3,87 @@ $mediaBp1Width: 960px;
 $mediaMinWidth: 480px;
 
 .checkbox-round {
-    width: 1.3em;
-    height: 1.3em;
-    background-color: white;
-    border-radius: 50%;
-    vertical-align: middle;
-    border: 1px solid #ddd;
-    appearance: none;
-    -webkit-appearance: none;
-    outline: none;
-    cursor: pointer;
+  width: 1.3em;
+  height: 1.3em;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .checkbox-round:checked {
-    background-color: blue;
+  background-color: blue;
 }
 
 .oneService {
-    .flex-column {
-        display: flex;
-        justify-content: space-between;
-        gap: Min(3rem, 10rem);
-        margin-bottom: 2rem;
-        cursor: pointer;
-        transition: 0.1s all;
-    
-        &:hover {
-            border-radius: 0.3rem;
-            background-color: rgba(128, 128, 128, 0.151);
-        }
+  .flex-column {
+    display: flex;
+    justify-content: space-between;
+    gap: Min(3rem, 10rem);
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: 0.1s all;
+
+    &:hover {
+      border-radius: 0.3rem;
+      background-color: rgba(128, 128, 128, 0.151);
     }
+  }
 }
 
 .serviceForm {
-    .sectionAnnounce {
-        background-color: white;;
-    }
-    .card {
-        border: 1px solid gray;
-        border-radius: 1rem;
-        padding: 1rem;
-    }
-    h2 {
-        margin-top: 3rem;
-    }
-    h3 {
-        display: inline-block;
-        margin-top: 0;
-        margin-left: 1rem;
-        margin-bottom: 0;
-    }
+  .sectionAnnounce {
+    background-color: white;
+  }
+  .card {
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+  h2 {
+    margin-top: 3rem;
+  }
+  h3 {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
 
-    .time {
-        margin-top: 0px;
-        margin-bottom: 1rem;
-        color: gray;
+  .time {
+    margin-top: 0px;
+    margin-bottom: 1rem;
+    color: gray;
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 1rem 0;
+    border-top: 1px solid black;
+    width: 100%;
+    overflow: hidden;
+
+    button {
+      margin-right: 20vw;
+      color: white;
+      background-color: black;
+      font-size: 1.5rem;
+      padding: 1rem 3rem;
+      cursor: pointer;
+      transition: 0.2s all;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
-
-    footer {
-        display: flex;
-        justify-content: flex-end;
-        background-color: white;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        padding: 1rem 0;
-        border-top: 1px solid black;
-        width: 100%;
-        overflow: hidden;
-
-        button {
-            margin-right: 20vw;
-            color: white;
-            background-color: black;
-            font-size: 1.5rem;
-            padding: 1rem 3rem;
-            cursor: pointer;
-            transition: 0.2s all;
-
-            &:hover {
-                transform:scale(1.1)
-            }
-        }
-    }
+  }
 }

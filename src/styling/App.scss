@@ -3,38 +3,38 @@ $mediaBp1Width: 960px;
 $mediaMinWidth: 480px;
 
 .App {
-    margin: 0rem 15vw;
+  margin: 0rem 15vw;
 }
 
 .App-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    .flex-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
-        margin: 1rem 0 0 0;
-        button {
-            height: 2rem;
-            width: 2rem;
-        }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0 0 0;
+    button {
+      height: 2rem;
+      width: 2rem;
     }
+  }
 }
 
 .twoSections {
-    display: grid;
-    @media (min-width: $mediaBp1Width) {
-        grid: 1fr/ Minmax(0, 1fr) Minmax(0, 0.5fr);;
-    }
+  display: grid;
+  @media (min-width: $mediaBp1Width) {
+    grid: 1fr / Minmax(0, 1fr) Minmax(0, 0.5fr);
+  }
 
-    @media (max-width: $mediaMinWidth) {
-        grid: Minmax(0, 1fr) Minmax(0, 0.5fr) / 1fr;
-    }
+  @media (max-width: $mediaMinWidth) {
+    grid: Minmax(0, 1fr) Minmax(0, 0.5fr) / 1fr;
+  }
 
-    justify-items:center;
-    gap: 5rem;
-    padding-bottom: 7rem;
+  justify-items: center;
+  gap: 5rem;
+  padding-bottom: 7rem;
 }

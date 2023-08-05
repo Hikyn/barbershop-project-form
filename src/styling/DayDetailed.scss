@@ -1,28 +1,26 @@
 .timeslots {
-    margin-top: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .timeslot {
+    height: 3rem;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    .timeslot {
-        height: 3rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: white;
-        cursor: pointer;
-        transition: all 0.2s;
-        
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
 
-        &:hover {
-            background-color: rgba(0, 0, 255, 0.158);
-        }
-        div {
-            margin: 0 1rem;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    &:hover {
+      background-color: rgba(0, 0, 255, 0.158);
     }
-    
+    div {
+      margin: 0 1rem;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

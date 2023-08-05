@@ -1,11 +1,11 @@
-import { FormEventHandler, useEffect, useState } from 'react';
-import { ILocation } from '../interfaces/interfaces';
-import '../styling/Location.scss';
-import { json } from 'stream/consumers';
-import LocationCard from './LocationCard'; 
+import { FormEventHandler, useEffect, useState } from "react";
+import { ILocation } from "../interfaces/interfaces";
+import "../styling/Location.scss";
+import { json } from "stream/consumers";
+import LocationCard from "./LocationCard";
 
 interface Props {
-    setFormLocation: (location: ILocation) => void;
+  setFormLocation: (location: ILocation) => void;
 }
 
 const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
@@ -15,56 +15,65 @@ const LocationForm: React.FC<Props> = ({ setFormLocation }) => {
   function onSubmitButton(event: React.FormEvent<HTMLFormElement>) {
     event?.preventDefault();
     const target = event.target as typeof event.target & {
-        location: { value: string };
+      location: { value: string };
     };
     //console.log(target.location.value);
-    barbershops.forEach(barbershop => {
+    barbershops.forEach((barbershop) => {
       if (barbershop._id === target.location.value) {
         setFormLocation(barbershop);
       }
-    })
-  };
+    });
+  }
 
-  async function getBarbershops(){
+  async function getBarbershops() {
     const url = new URL("http:/localhost:3000/barbershops");
     const res = await fetch(url, {
-      method: "GET"
-    })
+      method: "GET",
+    });
     const data = await res.json();
     //console.log(data)
-    console.log("Requesting locations")
+    console.log("Requesting locations");
     setBarbershops(data);
   }
 
   const handleClick = (event: any) => {
     event.target.form.requestSubmit();
-  }
+  };
 
   useEffect(() => {
     getBarbershops();
-  }, [])
+  }, []);
 
   useEffect(() => {
     //console.log(barbershops);
-  }, [barbershops])
-    
+  }, [barbershops]);
+
   return (
     <>
-    <h1 className='sectionAnnounce'>Select location</h1>
-    <div className='locationCounter'>
-      <h2>Example barbershop</h2>
-      <div>{barbershops.length} locations</div>
-    </div>
-    <form className="locationForm" onSubmit={onSubmitButton}>
-      <div className="barbershops">
-      {barbershops.map((location) => {
-        return (
-          <LocationCard location={location} onSubmitButton={onSubmitButton} handleClick={handleClick} key={location._id} />
-      )})}
+      <h1 className="sectionAnnounce">Select location</h1>
+      <div className="locationCounter">
+        <h2>Example barbershop</h2>
+        <div>{barbershops.length} locations</div>
       </div>
-      <button type="submit" hidden>Submit</button>
-    </form>
-    </>);
-}
+      <form className="locationForm" onSubmit={onSubmitButton}>
+        <div className="barbershops">
+          {barbershops.map((location) => {
+            return (
+              <LocationCard
+                location={location}
+                onSubmitButton={onSubmitButton}
+                handleClick={handleClick}
+                key={location._id}
+              />
+            );
+          })}
+        </div>
+        <button type="submit" hidden>
+          Submit
+        </button>
+      </form>
+    </>
+  );
+};
 
 export default LocationForm;

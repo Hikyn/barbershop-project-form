@@ -17,13 +17,13 @@
 </a>
 
 <details>
-<summary>Mobile preview</summary>
+<summary><b>Mobile preview</b></summary>
 <br>
 <img src="src/images/preview.gif " height="500"/>
 </details>
 
 <details>
-<summary>Desktop preview</summary>
+<summary><b>Desktop preview</b></summary>
 <br>
 <img src="src/images/previewDesktop.gif " height="500"/>
 </details>
